@@ -198,15 +198,11 @@
       image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
       locale: 'auto',
       token: function(token) {
-        if(token.email.split("@")[1]==='hwemail.com' || token.email.split("@")[1]==='hw.com') {
-          var id = token.email.replace("@", "").replace(".","");
-          firebase.database().ref('payments/' + id).push({
-            amount: 1000,
-            token: token
-          });
-        } else {
-          alert("Please try that again with a Harvard-Westlake email. You haven't been charged.");
-        }
+        var id = token.email.replace("@", "").replace(".","");
+        firebase.database().ref('payments/' + id).push({
+          amount: 1000,
+          token: token
+        });
       }
     });
 
