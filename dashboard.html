@@ -66,7 +66,8 @@
         var inner = json[key]
         for(var innerKey in inner) {
           var paid = inner[innerKey].charge.paid;
-          $("#list").append("<a href='#' class='list-group-item "+(paid?"list-group-item-success'":"'")+"><h4 class='list-group-item-heading'>"+key+"</h4><p class='list-group-item-text'>"+(paid?"Paid":"Unpaid")+" - "+inner[innerKey].charge.amount+"<br>Last Four: "+inner[innerKey].charge.source.last4+"</p><p><button onclick=finished("+key+","+innerKey+") type='button' class='btn btn-default'>Product Delivered</button></p></a>");
+          if(inner[innerKey].delivered)
+          $("#list").append("<a href='#' class='list-group-item "+(paid?"list-group-item-success'":"'")+"><h4 class='list-group-item-heading'>"+key+"</h4><p class='list-group-item-text'>"+(paid?"Paid":"Unpaid")+" - "+inner[innerKey].charge.amount+"<br>Last Four: "+inner[innerKey].charge.source.last4+"</p><p><button onclick=finished('"+key+"','"+innerKey+"') type='button' class='btn btn-default'>Product Delivered</button></p></a>");
         }
       }
     });
