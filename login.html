@@ -1,0 +1,123 @@
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <script src="https://use.fontawesome.com/d2d8955d10.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/animate.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css.css">
+    <title>Elite Highlights</title>
+  </head>
+  <body class="animated fadeIn">
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header navbar-text-color">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand brandfont" href="index.html">
+            <div>Sportsbook</div>
+          </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="about.html">About</a></li>
+            <li><a href="about.html">Find a Game</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li id=signinbtn><a href="login.html"></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class=container-fluid>
+      <br>
+      <row>
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+          <div class="form-horizontal">
+            <div class="form-group">
+              <label for="email" class="col-sm-2 control-label">Email</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control" id="email" placeholder="Email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password" class="col-sm-2 control-label">Password</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" id="password" placeholder="Password">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox"> Remember me
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button id="submit" class="btn btn-default">Sign in</button>
+              </div>
+            </div>
+          </div>
+          <p class=text-right>Don't have an account? <a href="signup.html" class="btn btn-default">Sign Up</a></p>
+          <p class=text-right>Forgot your password? <a href="#" class="btn btn-default">Reset Password</a></p>
+        <div>
+      </row>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBDmxqSQvDt2cFEELcdzYdZ1yTnlrhDDWg",
+        authDomain: "stamps-c493b.firebaseapp.com",
+        databaseURL: "https://stamps-c493b.firebaseio.com",
+        projectId: "stamps-c493b",
+        storageBucket: "stamps-c493b.appspot.com",
+        messagingSenderId: "762350855876"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+      $("#submit").click(function(e){
+        login();
+      });
+
+      function login() {
+        var email = $("#email").val();
+        var password = $("#password").val();
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+        });
+      }
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          var displayName = user.displayName;
+          var email = user.email;
+          var emailVerified = user.emailVerified;
+          var photoURL = user.photoURL;
+          var isAnonymous = user.isAnonymous;
+          uid = user.uid;
+          var providerData = user.providerData;
+          // ...
+          $("#signinbtn").html("Logged in "+email)
+          window.location.href = "index.html";
+        } else {
+          $("#signinbtn").html("Sign in")
+        }
+      });
+    </script>
+  </body>
+</html>
