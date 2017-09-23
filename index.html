@@ -73,7 +73,7 @@
       <br>
       <br>
     </div>
-    <button class="btn btn-default btn-lg" id="stripeButton">Pre-Order Now</button>
+    <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">Pre-Order Now</button>
   </div>
   <div class=container-fluid style="background-color:rgb(77, 77, 77);padding-left:10%;padding-right:10%;padding-top:20px;padding-bottom:20px;color:white;font-size:20">
     <div style="font-size:5vw"><b>FAQ</b></div>
@@ -143,6 +143,35 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="customerInfoModal">Customer Info</h4>
+      </div>
+      <div class="modal-body">
+        <p>Really quickly, I'm gonna need your info.</p>
+        <form>
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName">
+          </div>
+          <div class="form-group">
+            <label for="hwemail">Harvard-Westlake Email</label>
+            <input type="email" class="form-control" id="hwemail">
+          </div>
+        </form>
+        <p>Also - I can't refund you if the school bans the use of this product. Other reasonable refunds are ok though.</p>
+        <p><button id="stripeButton" class="btn btn-default">Add Payment Info</button></p>
+      </div>
+    </div>
+  </div>
+</div>
   <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
   <script>
     // Initialize Firebase
@@ -192,7 +221,7 @@
     });
   </script>
   <script>
-
+    var name = {};
     var handler = StripeCheckout.configure({
       key: 'pk_test_NafwozyZHn3RpuumJZa657jo',
       image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
@@ -201,23 +230,35 @@
         var id = token.email.replace("@", "").replace(".","");
         firebase.database().ref('payments/' + id).push({
           amount: 1000,
-          token: token
+          token: token,
+          contact: name
         });
       }
     });
 
     document.getElementById('stripeButton').addEventListener('click', function(e) {
-      // Open Checkout with further options:
-      alert("NOTE - I can\'t refund you if the school bans the use of this product. Other reasonable refunds are ok though. Also use a hwemail address so I can verify that you\'re actually a student");
-      handler.open({
-        name: 'Honor Code Stamps',
-        description: '1 Stamp',
-        amount: 1000,
-        locale: 'auto',
-        zipCode: true,
-        bitcoin: false
-      });
-      e.preventDefault();
+      var email = $("#hwemail").val()
+      if(email.split("@")[1]==='hwemail.com' || email.split("@")[1]==='hw.com') {
+        name = {
+          firstName: $("#firstName").val(),
+          lastName: $("#lastName").val(),
+          email: $("#hwemail").val()
+        }
+        $('#myModal').modal('hide');
+        // Open Checkout with further options:
+        handler.open({
+          name: 'Honor Code Stamps',
+          description: '1 Stamp',
+          amount: 1000,
+          locale: 'auto',
+          zipCode: true,
+          bitcoin: false,
+          email: email
+        });
+        e.preventDefault();
+      } else {
+        alert("Please use a Harvard-Westlake email");
+      }
     });
 
     // Close Checkout on page navigation:
