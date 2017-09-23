@@ -1,0 +1,214 @@
+<head>
+  <script src="js/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src=""></script>
+  <script src="static/js/typed.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="static/css/animate.css">
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Rubik:400,500,700" rel="stylesheet">
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+  <link rel="stylesheet" type="text/css" href="static/css/css.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HW Venture</title>
+</head>
+<body>
+  <style>
+    body {
+      font-family: 'Rubik', sans-serif;
+    }
+
+    a:link
+    {
+       text-decoration: none;
+       color: #cbc8c8;
+    }
+    a:visited
+    {
+       text-decoration: none;
+       color: #cbc8c8;
+    }
+    a:hover
+    {
+       text-decoration: none;
+       color: #cbc8c8;
+    }
+    a:active
+    {
+       text-decoration: none;
+       color: #cbc8c8;
+    }
+
+    .title {
+      font-size: 12vw;
+      color: white;
+      padding-right: 10%;
+      padding-bottom: 50px;
+      width:60%;
+      margin-left:40%;
+      background-color: rgba(153,0,0,0.5);
+      height:100%;
+    }
+
+    #kcbackground {
+      z-index: -200;
+      position:fixed;
+      width: 100%;
+      height: 100%;
+      background-image: url(splash2.png);
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      background-attachment: fixed;
+
+    }
+  </style>
+  <div id=kcbackground class="animated fadeIn">
+  </div>
+  <div class="title text-right">
+    <b>Honor<br>Code<br>Stamps</b>
+    <div class=subtitle style="font-size:5vw;">
+      Finishing a test has never felt so satisfying.
+
+      <br>
+      <br>
+    </div>
+    <button class="btn btn-default btn-lg" id="stripeButton">Pre-Order Now</button>
+  </div>
+  <div class=container-fluid style="background-color:rgb(77, 77, 77);padding-left:10%;padding-right:10%;padding-top:20px;padding-bottom:20px;color:white;font-size:20">
+    <div style="font-size:5vw"><b>FAQ</b></div>
+    <div>
+      <div style="font-weight:500">Why can't I pay in cash?</div>
+      <div style="padding-left:3%;">
+        I can't <del>take payments</del> sell shit on campus. It's in the handbook.
+        <br><br>
+        <blockquote>
+          <h4>Gambling and Exchanges of Currency</h4>
+          <p> Carrying and exchanging of currency on campus is strongly discouraged. <em>The selling of any items for any reason is not permitted.</em> (Students wishing to sell items for a charitable purpose must apply to the student government advisor for permission to do so.) Gambling is prohibited. “Friendly” gambling for athletic contests or card games is included in this prohibition.</p>
+        </blockquote>
+        <br>
+        Now what I <em>can</em> do is accept your wonderful payment digitally through this website and then I can "gift" you your stamp at school. I won't actually charge your card until you get your stamp. Also if you know me well you can pay me when I'm not on campus.
+        <br>
+        I'll be delivering people's stamps on Monday during activities or if you happen to catch me around campus.
+        <br>
+        Don't @ me.
+      </div>
+    </div>
+    <br>
+    <div>
+      <div style="font-weight:500">I just ordered. When can I expect my stamps?</div>
+      <div style="padding-left:3%;">I need to order them but they should take about a week.</div>
+    </div>
+    <br>
+    <div>
+      <div style="font-weight:500">Why can't I have it right now.</div>
+      <div style="padding-left:3%;">Well, I can't assume how many people will want them so I'm doing preorders to guage how many I need to buy. They take about a week to manufacture/ship. You'll get them soon enough.</div>
+    </div>
+    <br>
+    <div>
+      <div style="font-weight:500">Is this affiliated with Harvard-Westlake?</div>
+      <div style="padding-left:3%;">No. They don't really know I'm doing this, actually. This product, while inspired by HW culture, is not affiliated at all with Harvard-Westlake. If they choose to restrict the use of this product on campus, I can't give you a refund.</div>
+    </div>
+    <br>
+    <div>
+      <div style="font-weight:500">Wait - I can't get a refund IF the school bans the use of this product?</div>
+      <div style="padding-left:3%;">
+        No, sorry :( <br>
+        If you buy one of these I'm GOING to make sure that you see a warning about this so please don't come running to me asking for your cash back if this happens.
+        <br>
+        This is the free market. If you don't like the rules, don't buy the product.
+      </div>
+    </div>
+    <br>
+    <div>
+      <div style="font-weight:500">What about if the product breaks or is defective?</div>
+      <div style="padding-left:3%;">
+        If your stamp came to you broken or defective I'll offer you a refund or a replacement.
+      </div>
+    </div>
+    <br>
+    <div>
+      <div style="font-weight:500">How can I contact you if I have a question/concern/inquiry?</div>
+      <div style="padding-left:3%;">
+        <a href="sms:1-310-913-7582">+1 (310) 913-7582</a> hmu
+      </div>
+    </div>
+    <br>
+    <div>
+      <div style="font-weight:500">Who are you?</div>
+      <div style="padding-left:3%;">
+        I'm Jonathan Damico. Buy my shit. ❤️
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+      if($(window).width()<400) {
+        $(".title").css("width", "100%");
+        $(".title").css("margin-left", "0");
+        $(".title").css("height", "50%");
+        $(".title").css("margin-bottom", "75%");
+      }
+      if($(window).width()>800) {
+        $(".title").css("font-size", "100.92");
+        $(".subtitle").css("font-size","40");
+      }
+    });
+
+    $(window).on('resize', function(){
+      if($(window).width()<400) {
+        $(".title").css("width", "100%");
+        $(".title").css("margin-left", "0");
+        $(".title").css("height", "50%");
+        $(".title").css("margin-bottom", "75%");
+      } else {
+        $(".title").css("width", "60%");
+        $(".title").css("margin-left", "40%");
+        $(".title").css("height", "100%");
+        $(".title").css("margin-bottom", "0");
+      }
+      if($(window).width()>800) {
+        $(".title").css("font-size", "100.92");
+        $(".subtitle").css("font-size","40");
+      } else {
+        $(".title").css("font-size", "12vw");
+        $(".subtitle").css("font-size", "5vw");
+      }
+    });
+  </script>
+  <script>
+    var handler = StripeCheckout.configure({
+      key: 'pk_test_NafwozyZHn3RpuumJZa657jo',
+      image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+      locale: 'auto',
+      token: function(token) {
+        $.ajax({
+          type: "POST",
+          url: "https://us-central1-stamps-c493b.cloudfunctions.net/chargeLater",
+          data: token,
+          dataType: 'application/json'
+        });
+      }
+    });
+
+    document.getElementById('stripeButton').addEventListener('click', function(e) {
+      // Open Checkout with further options:
+      handler.open({
+        name: 'Honor Code Stamps',
+        description: '1 Stamp',
+        amount: 999,
+        locale: 'auto',
+        zipCode: true,
+        bitcoin: true,
+
+
+      });
+      e.preventDefault();
+    });
+
+    // Close Checkout on page navigation:
+    window.addEventListener('popstate', function() {
+      handler.close();
+    });
+    </script>
+</body>
