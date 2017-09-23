@@ -221,9 +221,9 @@
     });
   </script>
   <script>
-    var name = {};
+    var contactInfo = {};
     var handler = StripeCheckout.configure({
-      key: 'pk_live_nTJh8dIL3ZWr8VFxkw9Cwc0E',//'pk_test_NafwozyZHn3RpuumJZa657jo',
+      key: 'pk_live_nTJh8dIL3ZWr8VFxkw9Cwc0E',
       image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
       locale: 'auto',
       token: function(token) {
@@ -231,15 +231,15 @@
         firebase.database().ref('payments/' + id).push({
           amount: 1000,
           token: token,
-          contact: name
+          contact: contactInfo
         });
       }
     });
 
     document.getElementById('stripeButton').addEventListener('click', function(e) {
-      var email = $("#hwemail").val()
+      var email = $("#hwemail").val();
       if(email.split("@")[1]==='hwemail.com' || email.split("@")[1]==='hw.com') {
-        name = {
+        contactInfo = {
           firstName: $("#firstName").val(),
           lastName: $("#lastName").val(),
           email: $("#hwemail").val()
