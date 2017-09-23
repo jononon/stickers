@@ -185,7 +185,7 @@
         $.ajax({
           type: "POST",
           url: "https://us-central1-stamps-c493b.cloudfunctions.net/chargeLater",
-          data: token,
+          data: token.id,
           dataType: 'application/json'
         });
       }
