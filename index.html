@@ -141,6 +141,19 @@
       </div>
     </div>
   </div>
+  <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBDmxqSQvDt2cFEELcdzYdZ1yTnlrhDDWg",
+      authDomain: "stamps-c493b.firebaseapp.com",
+      databaseURL: "https://stamps-c493b.firebaseio.com",
+      projectId: "stamps-c493b",
+      storageBucket: "stamps-c493b.appspot.com",
+      messagingSenderId: "762350855876"
+    };
+    firebase.initializeApp(config);
+  </script>
   <script>
     $(document).ready(function() {
       if($(window).width()<400) {
@@ -177,16 +190,15 @@
     });
   </script>
   <script>
+
     var handler = StripeCheckout.configure({
       key: 'pk_test_NafwozyZHn3RpuumJZa657jo',
       image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
       locale: 'auto',
       token: function(token) {
-        $.ajax({
-          type: "POST",
-          url: "https://us-central1-stamps-c493b.cloudfunctions.net/chargeLaterTwo",
-          data: {token: token.id},
-          dataType: 'application/json'
+        firebase.database().ref('payments/' + token.email).push({
+          amount: 1000,
+          token: token
         });
       }
     });
