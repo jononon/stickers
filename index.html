@@ -212,9 +212,10 @@
 
     document.getElementById('stripeButton').addEventListener('click', function(e) {
       // Open Checkout with further options:
+      alert("NOTE - I can\'t refund you if the school bans the use of this product. Other reasonable refunds are ok though. Also use a hwemail address so I can verify that you\'re actually a student");
       handler.open({
         name: 'Honor Code Stamps',
-        description: 'NOTE - I can\'t refund you if the school bans the use of this product. Other reasonable refunds are ok though. Also use a hwemail address so I can verify that you\'re actually a student',
+        description: '1 Stamp',
         amount: 1000,
         locale: 'auto',
         zipCode: true,
