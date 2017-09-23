@@ -196,7 +196,8 @@
       image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
       locale: 'auto',
       token: function(token) {
-        firebase.database().ref('payments/' + token.email).push({
+        var id = token.email.replace("@", "").replace(".","");
+        firebase.database().ref('payments/' + id).push({
           amount: 1000,
           token: token
         });
