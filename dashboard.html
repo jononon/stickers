@@ -74,7 +74,7 @@
           } else {
             flavour = " list-group-item-danger";
           }
-          $("#list").append("<a href='#' class='list-group-item"+flavour+"'><h4 class='list-group-item-heading'>"+key+"</h4><p class='list-group-item-text'>"+(paid?"Paid":"Unpaid")+" - "+inner[innerKey].charge.amount+"<br>Last Four: "+inner[innerKey].charge.source.last4+"</p><p><button onclick=finished('"+key+"','"+innerKey+"') type='button' class='btn btn-default'>Product Delivered</button></p></a>");
+          $("#list").append("<a href='#' class='list-group-item"+flavour+"'><h4 class='list-group-item-heading'>"+inner[innerKey].contact.firstName+" "+inner[innerKey].contact.lastName+"</h4><p class='list-group-item-text'>"+(paid?"Paid":"Unpaid")+" - "+inner[innerKey].charge.amount+"<br>Last Four: "+inner[innerKey].charge.source.last4+"<br>"+inner[innerKey].contact.email+"<br><button onclick=finished('"+key+"','"+innerKey+"') type='button' class='btn btn-default'>Product Delivered</button></p></a>");
         }
       }
     });
